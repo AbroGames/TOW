@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2nyaalwl062r"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Button.cs" id="1_kphc1"]
+[ext_resource type="PackedScene" uid="uid://bg6uusp3n1618" path="res://Scenes/World.tscn" id="2_bf77h"]
+
+[node name="MainMenu" type="CanvasLayer"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.5
+offset_top = -15.5
+offset_right = 76.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "НАЧИНАЮТ ИГРЫ"
+script = ExtResource("1_kphc1")
+_scene = ExtResource("2_bf77h")
