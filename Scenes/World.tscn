@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://bg6uusp3n1618"]
+
+[ext_resource type="Script" path="res://Scripts/World.cs" id="1_5x14w"]
+[ext_resource type="Shader" path="res://Floor.gdshader" id="2_x0dlq"]
+[ext_resource type="Texture2D" uid="uid://duw1nehdl2flg" path="res://icon.svg" id="3_8emj0"]
+[ext_resource type="PackedScene" uid="uid://c8qf6iprx63pr" path="res://Tank.tscn" id="4_i0ga4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s1kt3"]
+shader = ExtResource("2_x0dlq")
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_5x14w")
+
+[node name="Floor" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_s1kt3")
+position = Vector2(387.5, 238.5)
+scale = Vector2(5.99219, 3.74219)
+texture = ExtResource("3_8emj0")
+
+[node name="Tank" parent="." instance=ExtResource("4_i0ga4")]
