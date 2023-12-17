@@ -17,6 +17,6 @@ public partial class Game : Node2D
 	public override void _Ready()
 	{
 		Instance = this;
-		ChangeMainNode(GD.Load<PackedScene>("res://Scenes/MainMenu.tscn").Instantiate());
+		ChangeMainNode(GD.Load<PackedScene>("res://Scenes/UI/Menu/MainMenu.tscn").Instantiate());
 	}
 }
