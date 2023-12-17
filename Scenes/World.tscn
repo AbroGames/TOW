@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/World.cs" id="1_5x14w"]
 [ext_resource type="Shader" path="res://Assets/Shaders/GrayScaleFilter.gdshader" id="2_x0dlq"]
 [ext_resource type="Texture2D" uid="uid://duw1nehdl2flg" path="res://Assets/Textures/icon.svg" id="3_8emj0"]
-[ext_resource type="PackedScene" uid="uid://c8qf6iprx63pr" path="res://Tank.tscn" id="4_i0ga4"]
+[ext_resource type="PackedScene" uid="uid://c8qf6iprx63pr" path="res://Scenes/Tank.tscn" id="4_i0ga4"]
 [ext_resource type="PackedScene" uid="uid://070bv3khjbgv" path="res://Scenes/UI/HUD/HpIndicator.tscn" id="5_51102"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s1kt3"]
