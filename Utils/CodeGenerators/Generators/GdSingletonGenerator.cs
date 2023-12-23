@@ -8,11 +8,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using Abro.CodeGenerators.Extensions;
+using CodeGenerators.Extensions;
 using CodeGenerators;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Abro.CodeGenerators.Generators;
+namespace CodeGenerators.Generators;
 [Generator]
 public class GdSingletonGenerator : IIncrementalGenerator
 {

@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Abro.CodeGenerators.Analyzers;
+namespace CodeGenerators.Analyzers;
 
 /// <summary>
 /// Code fix for types which need to be partial. Simply adds the partial modifier to the type declaration.

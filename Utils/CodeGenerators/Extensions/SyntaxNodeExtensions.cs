@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Abro.CodeGenerators.Analyzers;
+using CodeGenerators.Analyzers;
 using CodeGenerators;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Abro.CodeGenerators.Extensions
+namespace CodeGenerators.Extensions
 {
 	internal static class SyntaxNodeExtensions
 	{

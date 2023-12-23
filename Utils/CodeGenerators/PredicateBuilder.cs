@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Abro.CodeGenerators;
+namespace CodeGenerators;
 
 /// <summary>
 /// Builds a predicate by chaining multiple conditions.

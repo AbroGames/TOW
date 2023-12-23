@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace TOW.Scripts;
+
 public partial class Tower : Node2D
 {
 	// Called when the node enters the scene tree for the first time.

@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace TOW.Scripts;
+
 public partial class Tank : Node2D
 {
 	[Export] private double _moveSpeed = 100;

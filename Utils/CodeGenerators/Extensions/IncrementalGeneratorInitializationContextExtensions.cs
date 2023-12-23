@@ -1,6 +1,6 @@
 using Microsoft.CodeAnalysis;
 
-namespace Abro.CodeGenerators.Extensions;
+namespace CodeGenerators.Extensions;
 
 /// <summary>
 /// Extensions for <see cref="IncrementalGeneratorInitializationContext"/>.

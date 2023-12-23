@@ -1,6 +1,6 @@
 using Microsoft.CodeAnalysis;
 
-namespace Abro.CodeGenerators.Analyzers;
+namespace CodeGenerators.Analyzers;
 
 /// <summary>
 /// Contains definitions of diagnostics which can be raised by Lombok.NET.

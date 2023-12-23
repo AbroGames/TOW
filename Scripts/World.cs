@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace TOW.Scripts;
+
 public partial class World : Node2D
 {
 	

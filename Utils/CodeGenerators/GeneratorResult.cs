@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Abro.CodeGenerators;
+namespace CodeGenerators;
 
 /// <summary>
 /// The result class for incremental generators. Either contains source code or a diagnostic which should be raised.

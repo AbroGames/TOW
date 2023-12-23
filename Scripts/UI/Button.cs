@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace TOW.Scripts.UI;
+
 public partial class Button : Godot.Button
 {
 	[Export] private PackedScene _scene;
