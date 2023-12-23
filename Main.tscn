@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cnmfd6ykt8478"]
 
 [ext_resource type="PackedScene" uid="uid://cm1a7qb32hd51" path="res://Scenes/Game.tscn" id="1_bmuxm"]
-[ext_resource type="Script" path="res://Scripts/Root.cs" id="2_6sfga"]
+[ext_resource type="PackedScene" uid="uid://b2nyaalwl062r" path="res://Scenes/UI/Menu/MainMenu.tscn" id="2_djatw"]
 [ext_resource type="Script" path="res://Scripts/References.cs" id="3_1crc8"]
 
 [node name="Main" type="Node"]
@@ -26,6 +26,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="MainMenu" parent="UI/Menu" instance=ExtResource("2_djatw")]
+
 [node name="Foreground" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 15
@@ -33,9 +35,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Root" type="Node" parent="."]
-script = ExtResource("2_6sfga")
 
 [node name="References" type="Node" parent="Root"]
 script = ExtResource("3_1crc8")
