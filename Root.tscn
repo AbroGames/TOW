@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://cnmfd6ykt8478"]
+
+[ext_resource type="PackedScene" uid="uid://cm1a7qb32hd51" path="res://Scenes/Game.tscn" id="1_5elft"]
+[ext_resource type="Script" path="res://Scripts/Containers/WorldContainer.cs" id="2_1ppee"]
+[ext_resource type="Script" path="res://Scripts/Containers/BackgroundContainer.cs" id="3_3jdd3"]
+[ext_resource type="Script" path="res://Scripts/Containers/HudContainer.cs" id="4_7qif4"]
+[ext_resource type="Script" path="res://Scripts/Containers/MenuContainer.cs" id="5_tb0pg"]
+[ext_resource type="Script" path="res://Scripts/Containers/ForegroundContainer.cs" id="6_4cahe"]
+[ext_resource type="Script" path="res://Scripts/References.cs" id="7_5xoh3"]
+[ext_resource type="PackedScene" uid="uid://b2nyaalwl062r" path="res://Scenes/UI/Menu/MainMenu.tscn" id="8_65mw8"]
+
+[node name="Root" type="Node"]
+
+[node name="Game" parent="." instance=ExtResource("1_5elft")]
+
+[node name="WorldContainer" type="Node2D" parent="Game"]
+script = ExtResource("2_1ppee")
+
+[node name="Screen" type="CanvasLayer" parent="Game"]
+
+[node name="BackgroundContainer" type="Control" parent="Game/Screen"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_3jdd3")
+
+[node name="HudContainer" type="Control" parent="Game/Screen"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_7qif4")
+
+[node name="MenuContainer" type="Control" parent="Game/Screen"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_tb0pg")
+
+[node name="ForegroundContainer" type="Control" parent="Game/Screen"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_4cahe")
+
+[node name="References" type="Node" parent="." node_paths=PackedStringArray("WorldContainer", "BackgroundContainer", "HudContainer", "MenuContainer", "ForegroundContainer")]
+script = ExtResource("7_5xoh3")
+WorldContainer = NodePath("../Game/WorldContainer")
+BackgroundContainer = NodePath("../Game/Screen/BackgroundContainer")
+HudContainer = NodePath("../Game/Screen/HudContainer")
+MenuContainer = NodePath("../Game/Screen/MenuContainer")
+ForegroundContainer = NodePath("../Game/Screen/ForegroundContainer")
+FirstScene = ExtResource("8_65mw8")
