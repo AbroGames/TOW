@@ -3,15 +3,7 @@ using System;
 
 namespace TOW.Scripts.Containers;
 
-public partial class HudContainer : Control
+public partial class HudContainer : NodeContainer<Control>
 {
 	
-	private Control _currentHudControl;
-
-	public void ChangeHudControl(Control newHudControl)
-	{
-		_currentHudControl?.QueueFree();
-		_currentHudControl = newHudControl;
-		AddChild(newHudControl);
-	}
 }

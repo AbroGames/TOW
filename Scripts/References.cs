@@ -1,18 +1,20 @@
 using CodeGenerators;
 using Godot;
 using Lombok.NET;
+using TOW.Scripts.Containers;
 
 namespace TOW.Scripts;
 
-
-// Simple singleton description class
-[GdSingleton]
+[Singleton]
 public partial class References : Node
 {
-    [Export] private PackedScene _scene;
-    [Export] private Vector2 _position;
-    [Export] private string _name;
-
+    [Export] public WorldContainer WorldContainer { get; private set; }
+    [Export] public BackgroundContainer BackgroundContainer { get; private set; }
+    [Export] public HudContainer HudContainer { get; private set; }
+    [Export] public MenuContainer MenuContainer { get; private set; }
+    [Export] public ForegroundContainer ForegroundContainer { get; private set; }
+    [Export] public PackedScene FirstScene { get; private set; }
+    
 }
 
 
