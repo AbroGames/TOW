@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/World.cs" id="1_5x14w"]
 [ext_resource type="Shader" path="res://Assets/Shaders/GrayScaleFilter.gdshader" id="2_x0dlq"]
 [ext_resource type="Texture2D" uid="uid://duw1nehdl2flg" path="res://Assets/Textures/icon.svg" id="3_8emj0"]
-[ext_resource type="PackedScene" uid="uid://qvosehqkuvnb" path="res://Tank.tscn" id="4_i0ga4"]
+[ext_resource type="PackedScene" uid="uid://qvosehqkuvnb" path="res://Scenes/Tank.tscn" id="4_7xgk5"]
 [ext_resource type="PackedScene" uid="uid://070bv3khjbgv" path="res://Scenes/UI/HUD/HpIndicator.tscn" id="5_51102"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s1kt3"]
@@ -18,7 +18,7 @@ position = Vector2(387.5, 238.5)
 scale = Vector2(5.99219, 3.74219)
 texture = ExtResource("3_8emj0")
 
-[node name="Tank" parent="." instance=ExtResource("4_i0ga4")]
+[node name="Tank" parent="." instance=ExtResource("4_7xgk5")]
 position = Vector2(494, 308)
 
 [node name="HpIndicator" parent="." instance=ExtResource("5_51102")]

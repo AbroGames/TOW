@@ -2,7 +2,7 @@
 using Godot;
 using Godot.Collections;
 
-namespace TOW.KludgeBox.Godot;
+namespace TOW.Scripts.KludgeBox.Godot;
 
 public static class GodotExtensions
 {

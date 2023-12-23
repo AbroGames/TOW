@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/References.cs" id="1_6dgfe"]
 [ext_resource type="PackedScene" uid="uid://b2nyaalwl062r" path="res://Scenes/UI/Menu/MainMenu.tscn" id="2_b0ydb"]
-[ext_resource type="PackedScene" uid="uid://cm1a7qb32hd51" path="res://Scenes/Game.tscn" id="3_vx5fm"]
+[ext_resource type="Script" path="res://Scripts/Game.cs" id="3_xvfls"]
 [ext_resource type="Script" path="res://Scripts/Containers/WorldContainer.cs" id="4_4bkf2"]
 [ext_resource type="Script" path="res://Scripts/Containers/BackgroundContainer.cs" id="5_6in4s"]
 [ext_resource type="Script" path="res://Scripts/Containers/HudContainer.cs" id="6_gfpjn"]
@@ -20,7 +20,8 @@ MenuContainer = NodePath("../Game/Screen/MenuContainer")
 ForegroundContainer = NodePath("../Game/Screen/ForegroundContainer")
 FirstScene = ExtResource("2_b0ydb")
 
-[node name="Game" parent="." instance=ExtResource("3_vx5fm")]
+[node name="Game" type="Node2D" parent="."]
+script = ExtResource("3_xvfls")
 
 [node name="WorldContainer" type="Node2D" parent="Game"]
 script = ExtResource("4_4bkf2")
