@@ -5,10 +5,11 @@ namespace TOW.Scripts;
 
 public partial class Game : Node2D
 {
-	
 	public override void _Ready()
 	{
-		References.Instance.MenuContainer.ChangeStoredNode(References.Instance.FirstScene.Instantiate() as Control);
+		var thing = References.Instance.FirstScene;
+		var noda = thing.Instantiate();
+		References.Instance.MenuContainer.ChangeStoredNode(noda as Control);
 	}
 	
 	public override void _Process(double delta)

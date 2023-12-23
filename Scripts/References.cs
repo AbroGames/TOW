@@ -5,9 +5,15 @@ using TOW.Scripts.Containers;
 
 namespace TOW.Scripts;
 
-[Singleton]
+//[Singleton]
 public partial class References : Node
 {
+    public static References Instance { get; private set; }
+
+    public override void _Ready()
+    {
+        Instance = this;
+    }
     [Export] public WorldContainer WorldContainer { get; private set; }
     [Export] public BackgroundContainer BackgroundContainer { get; private set; }
     [Export] public HudContainer HudContainer { get; private set; }
