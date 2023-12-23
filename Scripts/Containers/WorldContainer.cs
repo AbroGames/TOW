@@ -1,18 +1,13 @@
 using Godot;
 using System;
 
-namespace TOW.Scripts;
+namespace TOW.Scripts.Containers;
 
-public partial class Game : Node2D
+public partial class WorldContainer : Node2D
 {
+	
 	private Node _currentWorldNode;
-	private Node _currentScreenNode;
-	
-	public override void _Ready()
-	{
-		
-	}
-	
+
 	public void ChangeWorldNode(Node newWorldNode)
 	{
 		_currentWorldNode?.QueueFree();

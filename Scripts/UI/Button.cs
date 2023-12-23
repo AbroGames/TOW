@@ -11,7 +11,7 @@ public partial class Button : Godot.Button
 	{
 		Pressed += () =>
 		{
-			Game.Instance.ChangeMainNode(_scene.Instantiate());
+			//Game.Instance.ChangeMainNode(_scene.Instantiate());
 			GetParent().GetParent().QueueFree();
 		};
 		

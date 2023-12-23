@@ -1,34 +1,52 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnmfd6ykt8478"]
+[gd_scene load_steps=9 format=3 uid="uid://cnmfd6ykt8478"]
 
 [ext_resource type="PackedScene" uid="uid://cm1a7qb32hd51" path="res://Scenes/Game.tscn" id="1_bmuxm"]
-[ext_resource type="PackedScene" uid="uid://b2nyaalwl062r" path="res://Scenes/UI/Menu/MainMenu.tscn" id="2_djatw"]
+[ext_resource type="Script" path="res://Scripts/Containers/WorldContainer.cs" id="2_jjppf"]
 [ext_resource type="Script" path="res://Scripts/References.cs" id="3_1crc8"]
+[ext_resource type="Script" path="res://Scripts/Screen.cs" id="3_e58ob"]
+[ext_resource type="Script" path="res://Scripts/Containers/BackgroundContainer.cs" id="4_57xwl"]
+[ext_resource type="Script" path="res://Scripts/Containers/HudContainer.cs" id="4_mrk4o"]
+[ext_resource type="Script" path="res://Scripts/Containers/MenuContainer.cs" id="6_1p1rr"]
+[ext_resource type="Script" path="res://Scripts/Containers/ForegroundContainer.cs" id="7_a2nsw"]
 
-[node name="Main" type="Node"]
+[node name="Root" type="Node"]
 
 [node name="Game" parent="." instance=ExtResource("1_bmuxm")]
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="WorldContainer" type="Node2D" parent="Game"]
+script = ExtResource("2_jjppf")
 
-[node name="Background" type="Control" parent="UI"]
+[node name="Screen" type="CanvasLayer" parent="Game"]
+script = ExtResource("3_e58ob")
+
+[node name="BackgroundContainer" type="Control" parent="Game/Screen"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_57xwl")
 
-[node name="Menu" type="Control" parent="UI"]
+[node name="HudContainer" type="Control" parent="Game/Screen"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_mrk4o")
 
-[node name="MainMenu" parent="UI/Menu" instance=ExtResource("2_djatw")]
+[node name="MenuContainer" type="Control" parent="Game/Screen"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_1p1rr")
 
-[node name="Foreground" type="Control" parent="UI"]
+[node name="ForegroundContainer" type="Control" parent="Game/Screen"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,8 +54,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("7_a2nsw")
 
-[node name="Root" type="Node" parent="."]
-
-[node name="References" type="Node" parent="Root"]
+[node name="References" type="Node" parent="."]
 script = ExtResource("3_1crc8")
