@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://qvosehqkuvnb"]
+[gd_scene load_steps=5 format=3 uid="uid://qvosehqkuvnb"]
 
 [ext_resource type="Script" path="res://Scripts/World/Tank.cs" id="1_nehhi"]
 [ext_resource type="Texture2D" uid="uid://duw1nehdl2flg" path="res://Assets/Textures/icon.svg" id="2_otf7b"]
 [ext_resource type="Script" path="res://Scripts/World/Tower.cs" id="3_laaoh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lk5bf"]
+size = Vector2(102, 128)
 
 [node name="Tank" type="Node2D"]
 script = ExtResource("1_nehhi")
@@ -24,3 +27,8 @@ texture = ExtResource("2_otf7b")
 [node name="Sprite2D" type="Sprite2D" parent="Tower"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_otf7b")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_lk5bf")
