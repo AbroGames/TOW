@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cnmfd6ykt8478"]
 
 [ext_resource type="Script" path="res://Scripts/References.cs" id="1_6dgfe"]
-[ext_resource type="PackedScene" uid="uid://b2nyaalwl062r" path="res://Scenes/UI/Menu/MainMenu.tscn" id="2_b0ydb"]
+[ext_resource type="PackedScene" uid="uid://b2nyaalwl062r" path="res://Scenes/Screen/Menu/MainMenu.tscn" id="2_b0ydb"]
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="3_xvfls"]
 [ext_resource type="Script" path="res://Scripts/Containers/WorldContainer.cs" id="4_4bkf2"]
 [ext_resource type="Script" path="res://Scripts/Containers/BackgroundContainer.cs" id="5_6in4s"]

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace TOW.Scripts;
+namespace TOW.Scripts.World;
 
 public partial class Tower : Node2D
 {
