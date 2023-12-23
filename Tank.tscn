@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://qvosehqkuvnb"]
+
+[ext_resource type="Script" path="res://Scripts/Tank.cs" id="1_nehhi"]
+[ext_resource type="Texture2D" uid="uid://duw1nehdl2flg" path="res://Assets/Textures/icon.svg" id="2_otf7b"]
+[ext_resource type="Script" path="res://Scripts/Tower.cs" id="3_laaoh"]
+
+[node name="Tank" type="Node2D"]
+script = ExtResource("1_nehhi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 1)
+texture = ExtResource("2_otf7b")
+
+[node name="Tower" type="Node2D" parent="."]
+script = ExtResource("3_laaoh")
+
+[node name="Barrel" type="Node2D" parent="Tower"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Tower/Barrel"]
+position = Vector2(0, -50)
+scale = Vector2(0.2, 1)
+texture = ExtResource("2_otf7b")
+
+[node name="Sprite2D" type="Sprite2D" parent="Tower"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_otf7b")
