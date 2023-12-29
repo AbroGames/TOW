@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Godot;
 using TOW.Scripts.KludgeBox.Collections;
 using TOW.Scripts.Services;
+using TOW.Scripts.Services.ModLoader;
 
 namespace TOW.Scripts;
 
@@ -17,12 +18,12 @@ public partial class ServiceProvider : Node
 	/// </summary>
 	public static ServiceProvider Instance { get; private set; }
 
-	private readonly Dictionary<Type, Node> _services = new();
+	private readonly Dictionary<Type, Service> _services = new();
 	
 	/// <summary>
 	/// Gets a read-only dictionary of registered services, where the key is the service type and the value is the corresponding Node.
 	/// </summary>
-	public ReadOnlyDictionary<Type, Node> RegisteredServices => _services.AsReadOnly();
+	public ReadOnlyDictionary<Type, Service> RegisteredServices => _services.AsReadOnly();
 	
 	public override void _Ready()
 	{
@@ -31,12 +32,15 @@ public partial class ServiceProvider : Node
 		
 		foreach (var child in children)
 		{
-			Set(child);
+			if (child is Service service)
+			{
+				Register(service);
+			}
 		}
 		
 		foreach (var child in children)
 		{
-			if (child is IService service)
+			if (child is Service service)
 			{
 				service.Run();
 			}
@@ -48,15 +52,12 @@ public partial class ServiceProvider : Node
 	/// </summary>
 	/// <typeparam name="T">The type of the service, must be a subclass of Node.</typeparam>
 	/// <param name="service">The service instance to be set.</param>
-	public static void Set<T>(T service) where T : Node
+	public static void Set<T>(T service) where T : Service
 	{
 		if(service is null) return;
 		
-		if (!typeof(T).IsAssignableTo(typeof(IService)))
-			throw new ArgumentException("Type must implement IService");
-		
 		var type = typeof(T);
-		if (Instance._services.TryGetValue(type, out Node existingService))
+		if (Instance._services.TryGetValue(type, out Service existingService))
 		{
 			existingService.QueueFree();
 		}
@@ -65,16 +66,25 @@ public partial class ServiceProvider : Node
 		Instance._services[type] = service;
 	}
 
+	private static void Register<T>(T service) where T : Service
+	{
+		if(service is null) return;
+		var type = typeof(T);
+		if (Instance._services.TryGetValue(type, out Service existingService))
+		{
+			existingService.QueueFree();
+		}
+		
+		Instance._services[type] = service;
+	}
+
 	/// <summary>
 	/// Gets the service of the specified type, if registered.
 	/// </summary>
 	/// <typeparam name="T">The type of the service, must be a subclass of Node.</typeparam>
 	/// <returns>The service instance if registered, otherwise null.</returns>
-	public static T Get<T>() where T : Node
+	public static T Get<T>() where T : Service
 	{
-		if (!typeof(T).IsAssignableTo(typeof(IService)))
-			throw new ArgumentException("Type must implement IService");
-		
 		var type = typeof(T);
 		return Instance._services[type] as T;
 	}
@@ -85,13 +95,10 @@ public partial class ServiceProvider : Node
 	/// <typeparam name="T">The type of the service, must be a subclass of Node.</typeparam>
 	/// <param name="service">The service instance to be returned if not registered.</param>
 	/// <returns>The registered service or the provided service if not registered.</returns>
-	public static T GetOrDefault<T>(T service) where T : Node
+	public static T GetOrDefault<T>(T service) where T : Service
 	{
-		if (!typeof(T).IsAssignableTo(typeof(IService)))
-			throw new ArgumentException("Type must implement IService");
-		
 		var type = typeof(T);
-		if (Instance._services.TryGetValue(type, out Node existingService))
+		if (Instance._services.TryGetValue(type, out Service existingService))
 		{
 			return existingService as T;
 		}
@@ -105,13 +112,10 @@ public partial class ServiceProvider : Node
 	/// </summary>
 	/// <typeparam name="T">The type of the service, must be a subclass of Node and must have a parameterless constructor.</typeparam>
 	/// <returns>The registered service or a newly created and registered service instance.</returns>
-	public static T ForceGet<T>() where T : Node, new()
+	public static T ForceGet<T>() where T : Service, new()
 	{
-		if (!typeof(T).IsAssignableTo(typeof(IService)))
-			throw new ArgumentException("Type must implement IService");
-			
 		var type = typeof(T);
-		if (Instance._services.TryGetValue(type, out Node service))
+		if (Instance._services.TryGetValue(type, out Service service))
 		{
 			return service as T;
 		}
