@@ -1,4 +1,5 @@
 using Godot;
+using TOW.Scripts.KludgeBox.Godot.Extensions;
 using TOW.Scripts.Utils;
 
 namespace TOW.Scripts.World;
@@ -17,7 +18,7 @@ public partial class Tank : Node2D
 		var requiredTowerRotation = GetAimAngle();
 
 		// Movement
-		Position += (Vector2.Up.Rotated(Rotation)) * -movementInput.Y * _movementSpeed * delta;
+		Position += this.Up() * -movementInput.Y * _movementSpeed * delta;
 
 		// Tank rotation
 		Rotation += Mathf.DegToRad(movementInput.X * _rotationSpeed * delta);
