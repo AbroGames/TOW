@@ -32,7 +32,7 @@ public class GodotFileSystem : FileSystem, IProxyFileSystem
     private static int _count = 0;
     public override bool IsReadOnly => false;
     public string RealPath => _root;
-    public GodotFileSystem(GodotFsRoot root, string path = null)
+    public GodotFileSystem(GodotFsRoot root, string path = null, bool createDirectories = false)
     {
         _root = root switch
         {
@@ -41,6 +41,8 @@ public class GodotFileSystem : FileSystem, IProxyFileSystem
             GodotFsRoot.Res => "res://" + (path?.RemoveRoot() ?? ""),
             _ => throw new InvalidEnumArgumentException()
         };
+
+        if(createDirectories) DirAccess.MakeDirRecursiveAbsolute(_root);
         
         DirAccess dir = DirAccess.Open(_root);
         if (DirAccess.GetOpenError() != Error.Ok)
