@@ -37,7 +37,14 @@ public partial class Tank : Node2D
 		}
 
 		// Tank rotation
-		Rotation += Mathf.DegToRad(movementInput.X * _rotationSpeed * delta);
+		if (movementInput.X != 0)
+		{
+			var evt = new TankRotatedEvent(this);
+			if (!_eventBus.PublishCancellable(evt))
+			{
+				Rotation += Mathf.DegToRad(movementInput.X * _rotationSpeed * delta);
+			}
+		}
 
 		// Tower rotation
 		var rotationDir = Mathf.Sign(requiredTowerRotation);
