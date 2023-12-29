@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cnmfd6ykt8478"]
+[gd_scene load_steps=12 format=3 uid="uid://cnmfd6ykt8478"]
 
 [ext_resource type="Script" path="res://Scripts/References.cs" id="1_6dgfe"]
 [ext_resource type="PackedScene" uid="uid://b2nyaalwl062r" path="res://Scenes/Screen/Menu/MainMenu.tscn" id="2_b0ydb"]
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="3_xvfls"]
 [ext_resource type="Script" path="res://Scripts/Containers/WorldContainer.cs" id="4_4bkf2"]
+[ext_resource type="Script" path="res://Scripts/Services/EventBus.cs" id="4_fngmn"]
+[ext_resource type="Script" path="res://Scripts/Services/ModLoader/ModLoader.cs" id="5_4g8yw"]
 [ext_resource type="Script" path="res://Scripts/Containers/BackgroundContainer.cs" id="5_6in4s"]
 [ext_resource type="Script" path="res://Scripts/Containers/HudContainer.cs" id="6_gfpjn"]
 [ext_resource type="Script" path="res://Scripts/Containers/MenuContainer.cs" id="7_u10qh"]
@@ -23,6 +25,12 @@ FirstScene = ExtResource("2_b0ydb")
 
 [node name="Services" type="Node" parent="."]
 script = ExtResource("9_5kdtw")
+
+[node name="EventBus" type="Node" parent="Services"]
+script = ExtResource("4_fngmn")
+
+[node name="ModLoader" type="Node" parent="Services"]
+script = ExtResource("5_4g8yw")
 
 [node name="Game" type="Node2D" parent="."]
 script = ExtResource("3_xvfls")
