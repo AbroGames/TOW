@@ -1,18 +1,20 @@
-using Godot;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Godot;
 using TOW.Scripts.KludgeBox.Collections;
+
+namespace TOW.Scripts;
 
 /// <summary>
 /// Represents a class that manages services as nodes.
 /// </summary>
-public partial class Services : Node
+public partial class ServiceProvider : Node
 {
 	/// <summary>
 	/// Gets the singleton instance of the Services class.
 	/// </summary>
-	public static Services Instance { get; private set; }
+	public static ServiceProvider Instance { get; private set; }
 
 	private readonly Dictionary<Type, Node> _services = new();
 	
@@ -30,6 +32,8 @@ public partial class Services : Node
 		{
 			Set(child);
 		}
+		
+		
 	}
 
 	/// <summary>
