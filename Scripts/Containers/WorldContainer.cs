@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using TOW.Scripts.Events;
+using TOW.Scripts.Services;
 
 namespace TOW.Scripts.Containers;
 
@@ -9,6 +11,8 @@ public partial class WorldContainer : Node2D, INodeContainer<Node2D>
 	
 	public void ChangeStoredNode(Node2D newStoredNode)
 	{
+		if (ServiceProvider.Get<EventBus>().PublishCancellable(new WorldChangedEvent(CurrentStoredNode, newStoredNode))) return;
+		
 		CurrentStoredNode?.QueueFree();
 		CurrentStoredNode = newStoredNode;
 		(this as Node)?.AddChild(newStoredNode);
@@ -16,6 +20,8 @@ public partial class WorldContainer : Node2D, INodeContainer<Node2D>
 
 	public void ClearStoredNode()
 	{
+		if (ServiceProvider.Get<EventBus>().PublishCancellable(new WorldRemovedEvent(CurrentStoredNode))) return;
+		
 		CurrentStoredNode?.QueueFree();
 	}
 }
