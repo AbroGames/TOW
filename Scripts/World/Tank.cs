@@ -46,6 +46,6 @@ public partial class Tank : Node2D
 		var towerAng = Tower.Rotation;
 
 		
-		return Mathf.RadToDeg(Mathf.AngleDifference(towerAng, mouseAng) + Mathf.Pi/2);
+		return Mathf.RadToDeg(Mathf.AngleDifference(towerAng - Mathf.Pi/2, mouseAng));
 	}
 }
