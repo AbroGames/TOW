@@ -18,7 +18,7 @@ public partial class Tank : Node2D
 		var requiredTowerRotation = GetAimAngle();
 
 		// Movement
-		Position += this.Up() * -movementInput.Y * _movementSpeed * delta;
+		Position += this.Up() * movementInput.Y * _movementSpeed * delta;
 
 		// Tank rotation
 		Rotation += Mathf.DegToRad(movementInput.X * _rotationSpeed * delta);
@@ -34,8 +34,8 @@ public partial class Tank : Node2D
 		return Input.GetVector(
 			Keys.Left, 
 			Keys.Right, 
-			Keys.Forward, 
-			Keys.Back).Sign();
+			Keys.Back, 
+			Keys.Forward).Sign();
 	}
 
 	private double GetAimAngle()
