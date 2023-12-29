@@ -12,3 +12,8 @@ public class TankTowerRotatedEvent (Tank tank) : CancellableEvent
 {
     public Tank Tank { get; } = tank;
 }
+
+public class TankRotatedEvent (Tank tank) : CancellableEvent
+{
+    public Tank Tank { get; } = tank;
+}
