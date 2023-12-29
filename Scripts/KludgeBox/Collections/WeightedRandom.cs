@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TOW.Scripts.KludgeBox.Core;
 
@@ -10,27 +11,23 @@ namespace TOW.Scripts.KludgeBox.Collections
 	/// <typeparam name="T">The type of the stored items.</typeparam>
 	public class WeightedRandom<T> : IEnumerable
 	{
-		private List<WeightedItem<T>> items;
-
-		public WeightedRandom()
-		{
-			items = new List<WeightedItem<T>>();
-		}
-
-		public int Count => items.Count;
+		public int Count => _items.Count;
+		
+		private readonly List<WeightedItem<T>> _items = [];
+		private List<double> _prefixSumOfWeights;
 
 		/// <summary>
 		/// Adds an item with the specified weight to the picker. If the item already exists, its weight is increased.
 		/// </summary>
 		/// <param name="item">The item to add.</param>
-		/// <param name="weight">The weight of the item.</param>
-		public void Add(T item, int weight)
+		/// <param name="weight">The weight of the item. Must be more than 0.</param>
+		public void Add(T item, double weight)
 		{
-			if (item is null)
-				return;
+			if (item is null) return;
+			if (weight < 0) throw new ArgumentException("Weight must be more than 0");
 
 			// Check if the item already exists in the list
-			WeightedItem<T> existingItem = items.Find(i => i.Item.Equals(item));
+			var existingItem = _items.Find(i => i.Item.Equals(item));
 
 			if (existingItem != null)
 			{
@@ -40,8 +37,10 @@ namespace TOW.Scripts.KludgeBox.Collections
 			else
 			{
 				// Add a new item to the list
-				items.Add(new WeightedItem<T>(item, weight));
+				_items.Add(new WeightedItem<T>(item, weight));
 			}
+
+			_prefixSumOfWeights = GeneratePrefixSumOfWeights();
 		}
 
 		/// <summary>
@@ -50,30 +49,8 @@ namespace TOW.Scripts.KludgeBox.Collections
 		/// <returns>The randomly selected item.</returns>
 		public T PickRandom()
 		{
-			int totalWeight = 0;
-
-			// Calculate the total weight of all items
-			foreach (var item in items)
-			{
-				totalWeight += item.Weight;
-			}
-
-			// Generate a random number within the total weight range
-			int randomNumber = Rand.Range(0, totalWeight);
-
-			// Find the item corresponding to the random number
-			foreach (var item in items)
-			{
-				if (randomNumber < item.Weight)
-				{
-					return item.Item;
-				}
-
-				randomNumber -= item.Weight;
-			}
-
-			// This should never happen, but to avoid compilation errors, return the default value
-			return default;
+			var weightRandomIndex = GetRandomIndexFromPrefixSumOfWeights();
+			return _items[weightRandomIndex].Item;
 		}
 
 		/// <summary>
@@ -81,10 +58,10 @@ namespace TOW.Scripts.KludgeBox.Collections
 		/// </summary>
 		/// <param name="item">The item whose weight needs to be adjusted.</param>
 		/// <param name="weight">The new weight of the item.</param>
-		public void AdjustWeight(T item, int weight)
+		public void ChangeWeight(T item, double weight)
 		{
-			WeightedItem<T> existingItem = items.Find(i => i.Item.Equals(item));
-
+			var existingItem = _items.Find(i => i.Item.Equals(item));
+			
 			if (existingItem != null)
 			{
 				existingItem.Weight = weight;
@@ -97,29 +74,51 @@ namespace TOW.Scripts.KludgeBox.Collections
 		/// <param name="item">The item to remove.</param>
 		public void Remove(T item)
 		{
-			WeightedItem<T> existingItem = items.Find(i => i.Item.Equals(item));
+			var existingItem = _items.Find(i => i.Item.Equals(item));
 
 			if (existingItem != null)
 			{
-				items.Remove(existingItem);
+				_items.Remove(existingItem);
 			}
 		}
 
-		IEnumerator IEnumerable.GetEnumerator()
+		public IEnumerator GetEnumerator()
 		{
-			return items.GetEnumerator();
+			return _items.GetEnumerator();
 		}
 
-		private class WeightedItem<TItem>
+		private List<double> GeneratePrefixSumOfWeights()
 		{
-			public TItem Item { get; set; }
-			public int Weight { get; set; }
-
-			public WeightedItem(TItem item, int weight)
+			if (_items.Count == 0) return [];
+			
+			var prefixSum = new List<double>(_items.Count)
 			{
-				Item = item;
-				Weight = weight;
+				[0] = _items[0].Weight
+			};
+
+			for (var i = 1; i < prefixSum.Count; i++) {
+				prefixSum[i] = prefixSum[i - 1] + _items[i].Weight;
 			}
+			return prefixSum;
+		}
+
+		private int GetRandomIndexFromPrefixSumOfWeights()
+		{
+			var totalWeight = _prefixSumOfWeights[^1];
+			var randomValue = Rand.Range(totalWeight);
+
+			for (var i = 0; i < _prefixSumOfWeights.Count; i++) {
+				if (randomValue < _prefixSumOfWeights[i]) {
+					return i;
+				}
+			}
+			return _prefixSumOfWeights.Count - 1;
+		}
+
+		private class WeightedItem<TItem>(TItem item, double weight)
+		{
+			public TItem Item { get; set; } = item;
+			public double Weight { get; set; } = weight;
 		}
 	}
 }
