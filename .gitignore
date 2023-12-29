@@ -2,7 +2,7 @@
 .godot/
 *.csproj.old*
 /.idea/*/.idea/sonarlint/
-
+.idea/
 
 
 ## Ignore Visual Studio temporary files, build results, and
