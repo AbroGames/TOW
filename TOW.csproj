@@ -9,16 +9,19 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugType>embedded</DebugType>
     <DocumentationFile>.\.godot\mono\temp\bin\Debug\TOW.xml</DocumentationFile>
+    <NoWarn>1701;1702;CS1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'ExportDebug' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>embedded</DebugType>
     <DocumentationFile>.\.godot\mono\temp\bin\ExportDebug\TOW.xml</DocumentationFile>
+    <NoWarn>1701;1702;CS1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'ExportRelease' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>embedded</DebugType>
     <DocumentationFile>.\.godot\mono\temp\bin\ExportRelease\TOW.xml</DocumentationFile>
+    <NoWarn>1701;1702;CS1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Lombok.NET" Version="2.2.1" />
