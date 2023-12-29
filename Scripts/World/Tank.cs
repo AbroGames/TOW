@@ -29,8 +29,7 @@ public partial class Tank : Node2D
 		if (movementInput.Y != 0)
 		{
 			var evt = new TankMovedEvent(this);
-			_eventBus.Publish(evt);
-			if (!evt.IsCancelled)
+			if (!_eventBus.PublishCancellable(evt))
 			{
 				Position += this.Up() * movementInput.Y * _movementSpeed * delta;
 			}
@@ -53,8 +52,7 @@ public partial class Tank : Node2D
 		if (absoluteRequiredRotation > 0.01)
 		{
 			var evt = new TankTowerRotatedEvent(this);
-			_eventBus.Publish(evt);
-			if(!evt.IsCancelled)
+			if(!_eventBus.PublishCancellable(evt))
 			{
 				Tower.Rotation += Mathf.DegToRad(rotationDir * Mathf.Clamp(_towerRotationSpeed * delta, -absoluteRequiredRotation, absoluteRequiredRotation));
 			}
