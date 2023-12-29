@@ -4,15 +4,8 @@ using Godot.Collections;
 
 namespace TOW.Scripts.KludgeBox.Godot;
 
-public static class GodotExtensions
+public static class NodeExtensions
 {
-    #region Vectors
-
-    
-
-    #endregion
-    
-    #region Objects/Nodes
     /// <summary>
     /// Shortcut for GodotObject.IsInstanceValid(object)
     /// </summary>
@@ -57,8 +50,7 @@ public static class GodotExtensions
     }
     
     /// <summary>
-    /// Поставит ноду последней в очередь на обработку (отрисовку). В результате она отрисуется поверх всех остальных нод.
-    /// TODO: Подумать над переименованием в ToLast() или что-то такое
+    /// Sets the node as last in the queue for processing (rendering). As a result, it will be drawn on top of all other nodes.
     /// </summary>
     public static void ToForeground(this Node node)
     {
@@ -71,8 +63,7 @@ public static class GodotExtensions
     }
 
     /// <summary>
-    /// Поставит ноду первой в очередь на обработку (отрисовку). В результате все остальные ноды отрисуются поверх неё.
-    /// TODO: Подумать над переименованием в ToFirst() или что-то такое
+    /// Sets the node as first in the queue for processing (rendering). As a result, all other nodes will be drawn on top of it.
     /// </summary>
     public static void ToBackground(this Node node)
     {
@@ -85,7 +76,7 @@ public static class GodotExtensions
     }
     
     /// <summary>
-    ///	Возвращает первую дочернюю ноду указанного типа, либо null, если ноды такого типа нет.
+    /// Returns the first child node of the specified type or null if there is no node of that type.
     /// </summary>
     public static T GetChild<T>(this Node node) where T : class
     {
@@ -97,8 +88,8 @@ public static class GodotExtensions
     }
 
     /// <summary>
-    /// Пытается найти ближайшего родителя указанного типа. Тип также может быть интерфейсом.<br/>
-    /// Вернет null, если такого родителя не встретилось вплоть до root.
+    /// Attempts to find the nearest parent of the specified type. The type can also be an interface.<br/>
+    /// Returns null if such a parent is not encountered up to the root.
     /// </summary>
     public static T GetParent<T>(this Node child) where T : class
     {
@@ -111,11 +102,4 @@ public static class GodotExtensions
 
         return parent.GetParent<T>();
     }
-    #endregion
-
-    #region Color
-
-    
-
-    #endregion
 }
