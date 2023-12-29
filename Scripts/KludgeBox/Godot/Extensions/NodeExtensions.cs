@@ -2,6 +2,7 @@
 using System.Linq;
 using Godot;
 using Godot.Collections;
+using KludgeBox.Godot.Nodes;
 
 namespace TOW.Scripts.KludgeBox.Godot.Extensions;
 
@@ -17,6 +18,96 @@ public static class NodeExtensions
         return GodotObject.IsInstanceValid(gdObj);
     }
     
+    /// <summary>
+    /// Extension method that creates and returns a Destructor node to handle delayed removal of a given node.
+    /// If the delay is less than or equal to 0, the node is immediately removed using QueueFree().
+    /// </summary>
+    /// <param name="node">The node to be destructed.</param>
+    /// <param name="delay">The delay (in seconds) before the node is removed. Default is 0.</param>
+    /// <returns>The created Destructor node, or null if the delay is 0 or negative.</returns>
+    public static Destructor Destruct(this Node node, double delay = 0)
+    {
+        if (delay <= 0)
+        {
+            node.QueueFree();
+            return null;
+        }
+        var destructor = new Destructor(delay);
+        node.AddChild(destructor);
+        return destructor;
+    }
+
+    /// <summary>
+    /// Gets the absolute size of the sprite, taking into account the texture and global scale.
+    /// </summary>
+    /// <param name="sprite">The Sprite2D object.</param>
+    /// <returns>The absolute size of the sprite.</returns>
+    public static Vector2 GetAbsoluteSize(this Sprite2D sprite)
+    {
+        var texture = sprite.Texture;
+        if (!GodotObject.IsInstanceValid(texture))
+            return new Vector2();
+        var size = sprite.Texture.GetSize();
+        var scale = sprite.GlobalScale;
+
+        return new Vector2(size.X * scale.X, size.Y * scale.Y);
+    }
+
+    /// <summary>
+    /// Sets the absolute scale of the sprite based on the desired size.
+    /// </summary>
+    /// <param name="sprite">The Sprite2D object.</param>
+    /// <param name="size">The desired absolute size of the sprite.</param>
+    public static void SetAbsoluteScale(this Sprite2D sprite, Vector2 size)
+    {
+        var textureSize = sprite.Texture.GetSize();
+        sprite.Scale = new Vector2(size.X / textureSize.X, size.Y / textureSize.Y);
+    }
+    
+    /// <summary>
+    /// Creates a Dummy2D object dropped at the position of the Node2D object.
+    /// </summary>
+    /// <param name="node">The Node2D object.</param>
+    /// <param name="keepAlive">If true, the Dummy2D object will not be despawned when empty.</param>
+    /// <returns>The created Dummy2D object or null if it couldn't be created.</returns>
+    public static Dummy2D DropDummy(this Node2D node, bool keepAlive = false)
+    {
+        var parent = node.GetParent();
+        if (!parent.IsValid()) return null;
+
+        var dummy = new Dummy2D();
+        dummy.Despawn = !keepAlive;
+        parent.AddChild(dummy);
+
+        dummy.Position = node.Position;
+        dummy.Rotation = node.Rotation;
+
+        return dummy;
+    }
+
+    /// <summary>
+    /// Extension method that reparents the given node to a new parent node.
+    /// If the current parent node is valid, the node is reparented to the new parent node using Reparent().
+    /// If the current parent node is invalid but the new parent node is valid, the node is added as a child to the new parent.
+    /// </summary>
+    /// <param name="node">The node to be reparented.</param>
+    /// <param name="newParent">The new parent node to reparent to.</param>
+    public static void ParentTo(this Node node, Node newParent)
+    {
+        var currentParent = node.GetParent();
+
+        if (currentParent.IsValid())
+        {
+            node.Reparent(newParent, true);
+            return;
+        }
+
+        if (newParent.IsValid())
+        {
+            newParent.AddChild(node);
+            node.Owner = newParent;
+        }
+    }
     
     /// <summary>
     /// Sets the node as last in the queue for processing (rendering). As a result, it will be drawn on top of all other nodes.
