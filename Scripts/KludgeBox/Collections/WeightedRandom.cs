@@ -49,8 +49,8 @@ namespace TOW.Scripts.KludgeBox.Collections
 		/// <returns>The randomly selected item.</returns>
 		public T PickRandom()
 		{
-			var weightRandomIndex = GetRandomIndexFromPrefixSumOfWeights();
-			return _items[weightRandomIndex].Item;
+			var weightedRandomIndex = GetWeightedRandomIndexFromPrefixSumOfWeights();
+			return _items[weightedRandomIndex].Item;
 		}
 
 		/// <summary>
@@ -102,7 +102,7 @@ namespace TOW.Scripts.KludgeBox.Collections
 			return prefixSum;
 		}
 
-		private int GetRandomIndexFromPrefixSumOfWeights()
+		private int GetWeightedRandomIndexFromPrefixSumOfWeights()
 		{
 			var totalWeight = _prefixSumOfWeights[^1];
 			var randomValue = Rand.Range(totalWeight);
