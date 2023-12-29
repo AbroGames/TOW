@@ -17,6 +17,6 @@
     <EmbeddedResource Remove="Utils\**" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Utils\CodeGenerators\CodeGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="true" />
+    <!--<ProjectReference Include="Utils\CodeGenerators\CodeGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="true" />-->
   </ItemGroup>
 </Project>

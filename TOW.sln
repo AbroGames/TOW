@@ -2,10 +2,6 @@
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TOW", "TOW.csproj", "{DBF11EB1-9F9A-469F-B75F-3BE25A112E35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGenerators", "Utils\CodeGenerators\CodeGenerators.csproj", "{B539678B-ABA8-42C1-95FD-EF9A37E2CF82}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGeneratorsTests", "Utils\CodeGeneratorsTests\CodeGeneratorsTests.csproj", "{2B8C2E80-A6AC-443C-B4B0-BFAF51F0B55C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 	Debug|Any CPU = Debug|Any CPU
@@ -19,17 +15,5 @@ Global
 		{DBF11EB1-9F9A-469F-B75F-3BE25A112E35}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
 		{DBF11EB1-9F9A-469F-B75F-3BE25A112E35}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{DBF11EB1-9F9A-469F-B75F-3BE25A112E35}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
-		{B539678B-ABA8-42C1-95FD-EF9A37E2CF82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B539678B-ABA8-42C1-95FD-EF9A37E2CF82}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B539678B-ABA8-42C1-95FD-EF9A37E2CF82}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B539678B-ABA8-42C1-95FD-EF9A37E2CF82}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
-		{B539678B-ABA8-42C1-95FD-EF9A37E2CF82}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
-		{B539678B-ABA8-42C1-95FD-EF9A37E2CF82}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
-		{2B8C2E80-A6AC-443C-B4B0-BFAF51F0B55C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B8C2E80-A6AC-443C-B4B0-BFAF51F0B55C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B8C2E80-A6AC-443C-B4B0-BFAF51F0B55C}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B8C2E80-A6AC-443C-B4B0-BFAF51F0B55C}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
-		{2B8C2E80-A6AC-443C-B4B0-BFAF51F0B55C}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B8C2E80-A6AC-443C-B4B0-BFAF51F0B55C}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
