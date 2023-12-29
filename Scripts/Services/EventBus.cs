@@ -45,7 +45,7 @@ public partial class EventBus : Service
     }
 
     /// <summary>
-    /// Publishes a cancellable event using the message bus and returns a value indicating whether the event was cancelled.
+    /// Publishes a cancellable event using the EventBus and returns a value indicating whether the event was cancelled by any of the listeners.
     /// </summary>
     /// <typeparam name="T">The type of the cancellable event. It must inherit from <see cref="CancellableEvent"/>.</typeparam>
     /// <param name="event">The cancellable event to be published.</param>
@@ -53,13 +53,9 @@ public partial class EventBus : Service
     ///   <c>true</c> if the event was cancelled; otherwise, <c>false</c>.
     /// </returns>
     /// <remarks>
-    ///   <para>
-    ///   This method publishes a cancellable event using the message bus and checks whether the event has been cancelled.
-    ///   </para>
-    ///   <para>
-    ///   The event type must be a subclass of <see cref="CancellableEvent"/>.
-    ///   </para>
+    /// This method publishes the specified cancellable event using the EventBus and checks whether any of the listeners cancelled the event.
     /// </remarks>
+    /// <seealso cref="CancellableEvent"/>
     public bool PublishAndCheck<T>(T @event) where T : CancellableEvent
     {
         _bus.Publish(@event);
