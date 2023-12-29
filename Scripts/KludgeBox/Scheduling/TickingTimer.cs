@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KludgeBox.Scheduling;
+namespace TOW.Scripts.KludgeBox.Scheduling;
 
 /// <summary>
 /// Represents a simple ticking timer that triggers an event when reaching the specified tick delay.

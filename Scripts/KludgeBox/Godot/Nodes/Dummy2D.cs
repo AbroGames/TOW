@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace KludgeBox.Godot.Nodes;
+namespace TOW.Scripts.KludgeBox.Godot.Nodes;
 
 /// <summary>
 /// Custom 2D node class for a dummy object with optional despawn functionality.

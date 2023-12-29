@@ -2,7 +2,7 @@
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using KludgeBox.Godot.Nodes;
+using TOW.Scripts.KludgeBox.Godot.Nodes;
 
 namespace TOW.Scripts.KludgeBox.Godot.Extensions;
 

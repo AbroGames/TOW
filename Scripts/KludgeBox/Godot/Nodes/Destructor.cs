@@ -1,8 +1,7 @@
 ﻿using Godot;
 using TOW.Scripts.KludgeBox.Scheduling;
 
-
-namespace KludgeBox.Godot.Nodes;
+namespace TOW.Scripts.KludgeBox.Godot.Nodes;
 
 public partial class Destructor : Node
 {

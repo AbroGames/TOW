@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using TOW.Scripts.KludgeBox.Core;
 
-namespace KludgeBox.Collections
+namespace TOW.Scripts.KludgeBox.Collections
 {
 	/// <summary>
 	/// Represents a weighted random picker that can randomly select stored items based on their weight.
