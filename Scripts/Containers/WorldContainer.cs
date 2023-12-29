@@ -11,7 +11,7 @@ public partial class WorldContainer : Node2D, INodeContainer<Node2D>
 	
 	public void ChangeStoredNode(Node2D newStoredNode)
 	{
-		if (ServiceProvider.Get<EventBus>().PublishCancellable(new WorldChangedEvent(CurrentStoredNode, newStoredNode))) return;
+		if (ServiceProvider.Get<EventBus>().PublishAndCheck(new WorldChangedEvent(CurrentStoredNode, newStoredNode))) return;
 		
 		CurrentStoredNode?.QueueFree();
 		CurrentStoredNode = newStoredNode;
@@ -20,7 +20,7 @@ public partial class WorldContainer : Node2D, INodeContainer<Node2D>
 
 	public void ClearStoredNode()
 	{
-		if (ServiceProvider.Get<EventBus>().PublishCancellable(new WorldRemovedEvent(CurrentStoredNode))) return;
+		if (ServiceProvider.Get<EventBus>().PublishAndCheck(new WorldRemovedEvent(CurrentStoredNode))) return;
 		
 		CurrentStoredNode?.QueueFree();
 	}

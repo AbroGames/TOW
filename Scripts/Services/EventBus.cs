@@ -60,7 +60,7 @@ public partial class EventBus : Service
     ///   The event type must be a subclass of <see cref="CancellableEvent"/>.
     ///   </para>
     /// </remarks>
-    public bool PublishCancellable<T>(T @event) where T : CancellableEvent
+    public bool PublishAndCheck<T>(T @event) where T : CancellableEvent
     {
         _bus.Publish(@event);
         return @event.IsCancelled;
