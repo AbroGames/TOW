@@ -11,7 +11,9 @@ using TOW.Scripts.Utils;
 
 namespace TOW.Scripts.Services.ModLoader;
 
-public partial class ModLoader : Service
+
+[GlobalClass]
+public partial class ModLoader : Services.Service
 {
     private FileSystem _userModsFs = new GodotFileSystem(GodotFsRoot.User,null, true);
     private List<Mod> _mods = [];

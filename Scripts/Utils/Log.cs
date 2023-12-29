@@ -87,7 +87,7 @@ public static class Log
         string text = msg.ToString();
         
         var now = DateTime.Now;
-        return $"{now.ToShortDateString()} {now.ToLongTimeString()} {text} {_prefixes[(int)prefix]}";
+        return $"{now.ToShortDateString()} {now.ToLongTimeString()} {_prefixes[(int)prefix]} {text}";
     }
 }
 

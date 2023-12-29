@@ -30,16 +30,17 @@ public static class EventScanner
     /// <returns>An enumerable collection of <see cref="MethodInfo"/> representing event listener methods.</returns>
     public static IEnumerable<MethodInfo> ScanEventListenersOfType(Type type)
     {
-        var methods = AppDomain.CurrentDomain.GetAssemblies() // Returns all currently loaded assemblies
-            .SelectMany(x => x.GetTypes()) // returns all types defined in these assemblies
-            .Where(x => x.IsClass) // only yields classes
-            .SelectMany(x => x.GetMethods(BindingFlags.Static)) // returns all methods defined in those classes
-            .Where(x => x.ReturnType == typeof(void)) // method should return void
-            .Where(x => x.GetParameters().Length == 1) // method should accept only one parameter
-            .Where(x => x.GetParameters().First().ParameterType.IsAssignableTo(type)) // and that parameter must be assignable to a variable of type GameEvent
-            .Where(x => x.GetCustomAttributes(typeof(EventListenerAttribute), false).FirstOrDefault() != null); // returns only methods that have the EventListener attribute
-
-        return methods;
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies(); // Returns all currently loaded assemblies
+        var types = assemblies.SelectMany(x => x.GetTypes()); // returns all types defined in these assemblies
+        var classes = types.Where(x => x.IsClass); // only yields classes
+        var methods = classes.SelectMany(x => x.GetMethods()); // returns all methods defined in those classes
+        var staticMethods = methods.Where(x => x.IsStatic); // returns all methods defined in those classes
+        var voidReturns = staticMethods.Where(method => method.ReturnType == typeof(void)); // method should return void
+        var singleParameter = voidReturns.Where(x => x.GetParameters().Length == 1); // method should accept only one parameter
+        var rightParamType = singleParameter.Where(x => x.GetParameters().First().ParameterType.IsAssignableTo(type)); // and that parameter must be assignable to a variable of type
+        var listeners = rightParamType.Where(x => x.GetCustomAttributes(typeof(EventListenerAttribute), false).FirstOrDefault() != null); // returns only methods that have the EventListener attribute
+        
+        return listeners;
     }
 
     /// <summary>

@@ -93,7 +93,7 @@ public class EventBus
 
         // Subscribe to the message type using the created delegate
         return typeof(EventBus).GetMethod("Subscribe")!.MakeGenericMethod(messageType)
-            .Invoke(null, new object[] { actionDelegate }) as ListenerToken;
+            .Invoke(this, new object[] { actionDelegate }) as ListenerToken;
     }
 
     private List<EventHub> FindApplicableHubs(Type eventType)

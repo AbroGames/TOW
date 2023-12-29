@@ -7,6 +7,7 @@ using Bus = TOW.Scripts.KludgeBox.Events.EventBus;
 namespace TOW.Scripts.Services;
 
 
+[GlobalClass]
 public partial class EventBus : Service
 {
     private Bus _bus = new Bus();

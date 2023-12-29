@@ -5,6 +5,7 @@ using Godot;
 using TOW.Scripts.KludgeBox.Collections;
 using TOW.Scripts.Services;
 using TOW.Scripts.Services.ModLoader;
+using Service = TOW.Scripts.Services.Service;
 
 namespace TOW.Scripts;
 
@@ -56,7 +57,7 @@ public partial class ServiceProvider : Node
 	{
 		if(service is null) return;
 		
-		var type = typeof(T);
+		var type = service.GetType();
 		if (Instance._services.TryGetValue(type, out Service existingService))
 		{
 			existingService.QueueFree();
@@ -69,7 +70,7 @@ public partial class ServiceProvider : Node
 	private static void Register<T>(T service) where T : Service
 	{
 		if(service is null) return;
-		var type = typeof(T);
+		var type = service.GetType();
 		if (Instance._services.TryGetValue(type, out Service existingService))
 		{
 			existingService.QueueFree();
