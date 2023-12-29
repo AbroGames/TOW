@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Godot;
 using TOW.Scripts.KludgeBox.Collections;
+using TOW.Scripts.Services;
 
 namespace TOW.Scripts;
 
@@ -33,7 +34,13 @@ public partial class ServiceProvider : Node
 			Set(child);
 		}
 		
-		
+		foreach (var child in children)
+		{
+			if (child is IService service)
+			{
+				service.Run();
+			}
+		}
 	}
 
 	/// <summary>
@@ -44,6 +51,9 @@ public partial class ServiceProvider : Node
 	public static void Set<T>(T service) where T : Node
 	{
 		if(service is null) return;
+		
+		if (!typeof(T).IsAssignableTo(typeof(IService)))
+			throw new ArgumentException("Type must implement IService");
 		
 		var type = typeof(T);
 		if (Instance._services.TryGetValue(type, out Node existingService))
@@ -62,6 +72,9 @@ public partial class ServiceProvider : Node
 	/// <returns>The service instance if registered, otherwise null.</returns>
 	public static T Get<T>() where T : Node
 	{
+		if (!typeof(T).IsAssignableTo(typeof(IService)))
+			throw new ArgumentException("Type must implement IService");
+		
 		var type = typeof(T);
 		return Instance._services[type] as T;
 	}
@@ -74,6 +87,9 @@ public partial class ServiceProvider : Node
 	/// <returns>The registered service or the provided service if not registered.</returns>
 	public static T GetOrDefault<T>(T service) where T : Node
 	{
+		if (!typeof(T).IsAssignableTo(typeof(IService)))
+			throw new ArgumentException("Type must implement IService");
+		
 		var type = typeof(T);
 		if (Instance._services.TryGetValue(type, out Node existingService))
 		{
@@ -91,6 +107,9 @@ public partial class ServiceProvider : Node
 	/// <returns>The registered service or a newly created and registered service instance.</returns>
 	public static T ForceGet<T>() where T : Node, new()
 	{
+		if (!typeof(T).IsAssignableTo(typeof(IService)))
+			throw new ArgumentException("Type must implement IService");
+			
 		var type = typeof(T);
 		if (Instance._services.TryGetValue(type, out Node service))
 		{
@@ -101,4 +120,5 @@ public partial class ServiceProvider : Node
 		Set(newService);
 		return newService;
 	}
+	
 }
