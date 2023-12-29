@@ -9,11 +9,13 @@ public partial class MenuContainer : Control, INodeContainer<Control>
 	
 	public void ChangeStoredNode(Control newStoredNode)
 	{
-		(this as INodeContainer<Control>).ChangeStoredNode(newStoredNode);
+		CurrentStoredNode?.QueueFree();
+		CurrentStoredNode = newStoredNode;
+		(this as Node)?.AddChild(newStoredNode);
 	}
 
 	public void ClearStoredNode()
 	{
-		(this as INodeContainer<Control>).ClearStoredNode();
+		CurrentStoredNode?.QueueFree();
 	}
 }
