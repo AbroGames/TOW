@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cnmfd6ykt8478"]
+[gd_scene load_steps=10 format=3 uid="uid://cnmfd6ykt8478"]
 
 [ext_resource type="Script" path="res://Scripts/References.cs" id="1_6dgfe"]
 [ext_resource type="PackedScene" uid="uid://b2nyaalwl062r" path="res://Scenes/Screen/Menu/MainMenu.tscn" id="2_b0ydb"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Containers/HudContainer.cs" id="6_gfpjn"]
 [ext_resource type="Script" path="res://Scripts/Containers/MenuContainer.cs" id="7_u10qh"]
 [ext_resource type="Script" path="res://Scripts/Containers/ForegroundContainer.cs" id="8_lofju"]
+[ext_resource type="Script" path="res://Scripts/Services/Services.cs" id="9_5kdtw"]
 
 [node name="Root" type="Node"]
 
@@ -19,6 +20,9 @@ HudContainer = NodePath("../Game/Screen/HudContainer")
 MenuContainer = NodePath("../Game/Screen/MenuContainer")
 ForegroundContainer = NodePath("../Game/Screen/ForegroundContainer")
 FirstScene = ExtResource("2_b0ydb")
+
+[node name="Services" type="Node" parent="."]
+script = ExtResource("9_5kdtw")
 
 [node name="Game" type="Node2D" parent="."]
 script = ExtResource("3_xvfls")
