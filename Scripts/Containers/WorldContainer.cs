@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using KludgeBox.Godot;
 using TOW.Scripts.Events;
 using TOW.Scripts.Services;
 
@@ -16,6 +17,7 @@ public partial class WorldContainer : Node2D, INodeContainer<Node2D>
 		CurrentStoredNode?.QueueFree();
 		CurrentStoredNode = newStoredNode;
 		(this as Node)?.AddChild(newStoredNode);
+		Audio2D.Setup(Audio2D.Main, newStoredNode);
 	}
 
 	public void ClearStoredNode()

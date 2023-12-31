@@ -1,4 +1,5 @@
 using Godot;
+using KludgeBox.Godot;
 using TOW.Scripts.Containers;
 using TOW.Scripts.Events;
 using TOW.Scripts.Services;
@@ -13,5 +14,6 @@ public partial class Game : Node2D
 		var noda = thing.Instantiate(); 
 		References.Instance.MenuContainer.ChangeStoredNode(noda as Control);
 		ServiceProvider.Get<EventBus>().Publish(new GameReadyEvent(this));
+		Audio2D.Setup(this, null);
 	}
 }
