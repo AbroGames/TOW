@@ -1,13 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://bg6uusp3n1618"]
+[gd_scene load_steps=11 format=3 uid="uid://bg6uusp3n1618"]
 
 [ext_resource type="Script" path="res://Scripts/World/World.cs" id="1_3dp2u"]
 [ext_resource type="Shader" path="res://Assets/Shaders/GrayScaleFilter.gdshader" id="2_d04hx"]
 [ext_resource type="Texture2D" uid="uid://duw1nehdl2flg" path="res://Assets/Textures/icon.svg" id="3_jx7ku"]
 [ext_resource type="PackedScene" uid="uid://qvosehqkuvnb" path="res://Scenes/World/Tank.tscn" id="4_g2srd"]
+[ext_resource type="Script" path="res://Scenes/World/TowerCollider.cs" id="5_0a6yu"]
+[ext_resource type="Shader" path="res://Assets/Shaders/HitShader.gdshader" id="5_iccos"]
 [ext_resource type="PackedScene" uid="uid://070bv3khjbgv" path="res://Scenes/Screen/HUD/HpIndicator.tscn" id="5_p7uox"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s1kt3"]
 shader = ExtResource("2_d04hx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5234s"]
+resource_local_to_scene = true
+shader = ExtResource("5_iccos")
+shader_parameter/flashColor = Vector4(1, 0, 0, 1)
+shader_parameter/mixAmount = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6v8gm"]
+size = Vector2(130, 119.881)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_3dp2u")
@@ -20,6 +31,32 @@ texture = ExtResource("3_jx7ku")
 
 [node name="Tank" parent="." instance=ExtResource("4_g2srd")]
 position = Vector2(494, 308)
+_towerRotationSpeed = 480.0
+
+[node name="Sprite2D" parent="Tank" index="0"]
+material = SubResource("ShaderMaterial_5234s")
+
+[node name="Sprite2D" parent="Tank/Tower/Barrel" index="0"]
+position = Vector2(0, -120)
+scale = Vector2(0.2, 2.09375)
+
+[node name="Area2D" type="Area2D" parent="Tank/Tower/Barrel/Sprite2D" index="0"]
+collision_layer = 2
+script = ExtResource("5_0a6yu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tank/Tower/Barrel/Sprite2D/Area2D"]
+position = Vector2(0, -3.58209)
+shape = SubResource("RectangleShape2D_6v8gm")
+
+[node name="Area2D" parent="Tank" index="2"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="Enomee" parent="." instance=ExtResource("4_g2srd")]
+modulate = Color(0.823529, 0.823529, 0.823529, 1)
+position = Vector2(117, 157)
+rotation = 0.703927
+_isPlayer = false
 
 [node name="HpIndicator" parent="." instance=ExtResource("5_p7uox")]
 anchors_preset = 0
@@ -27,3 +64,5 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[editable path="Tank"]
