@@ -32,7 +32,7 @@ public partial class Tank : Node2D
 
 	public override void _Process(double delta)
 	{
-		HitOpacity = Mathf.Max(HitOpacity - 0.05, 0);
+		HitOpacity = Mathf.Max(HitOpacity - 0.02, 0);
 		
 		if(!_isPlayer) return;
 		
