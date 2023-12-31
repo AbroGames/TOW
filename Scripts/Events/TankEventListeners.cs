@@ -9,13 +9,13 @@ public class TankEventListeners
     [EventListener]
     public static void OnTowerRotated(TankTowerRotatedEvent @event)
     {
-        Log.Info($"{@event.Tank.Name}'s tower has been rotated");
-        @event.Cancel();
+        //Log.Info($"{@event.Tank.Name}'s tower has been rotated");
+        //@event.Cancel();
     }
     
     [EventListener]
     public static void OnTankMoved(TankMovedEvent @event)
     {
-        Log.Info($"{@event.Tank.Name} has been moved");
+        //Log.Info($"{@event.Tank.Name} has been moved");
     }
 }
