@@ -29,9 +29,9 @@ public partial class EventBus : Service
     /// <typeparam name="T">The event type to subscribe to.</typeparam>
     /// <param name="action">The action to execute when the event is published.</param>
     /// <returns>A listener token that can be used to unsubscribe from the event.</returns>
-    public virtual ListenerToken Subscribe<T>(Action<T> listener) where T : IEvent
+    public virtual ListenerToken Subscribe<T>(Action<T> listener, ListenerPriority priority) where T : IEvent
     {
-        return _bus.Subscribe(listener);
+        return _bus.Subscribe(listener, priority);
     }
 
     /// <summary>

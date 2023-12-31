@@ -23,9 +23,9 @@ public class EventBus
     /// <typeparam name="T">The event type to subscribe to.</typeparam>
     /// <param name="action">The action to execute when the event is published.</param>
     /// <returns>A listener token that can be used to unsubscribe from the event.</returns>
-    public ListenerToken Subscribe<T>(Action<T> action) where T : IEvent
+    public ListenerToken Subscribe<T>(Action<T> action, ListenerPriority priority) where T : IEvent
     {
-        return GetHub(typeof(T)).Subscribe(action);
+        return GetHub(typeof(T)).Subscribe(action, priority);
     }
 
     /// <summary>
@@ -67,7 +67,7 @@ public class EventBus
 
     private EventHub GetHub(Type eventType)
     {
-        if (_hubs.TryGetValue(eventType, out EventHub? hub) && hub is not null)
+        if (_hubs.TryGetValue(eventType, out EventHub hub) && hub is not null)
         {
             return hub;
         }
@@ -83,7 +83,7 @@ public class EventBus
     /// </summary>
     /// <param name="methodInfo">The MethodInfo representing the delivery action.</param>
     /// <returns>Message subscription token that can be used for unsubscribing.</returns>
-    public ListenerToken SubscribeMethod(MethodInfo methodInfo)
+    public ListenerToken SubscribeMethod(MethodInfo methodInfo, ListenerPriority priority)
     {
         Type messageType = methodInfo.GetParameters()[0].ParameterType;
 
@@ -93,7 +93,7 @@ public class EventBus
 
         // Subscribe to the message type using the created delegate
         return typeof(EventBus).GetMethod("Subscribe")!.MakeGenericMethod(messageType)
-            .Invoke(this, new object[] { actionDelegate }) as ListenerToken;
+            .Invoke(this, new object[] { actionDelegate, priority }) as ListenerToken;
     }
 
     private List<EventHub> FindApplicableHubs(Type eventType)

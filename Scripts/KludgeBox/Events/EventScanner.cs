@@ -52,7 +52,8 @@ public static class EventScanner
     {
         foreach (var method in methods)
         {
-            targetEventBus.SubscribeMethod(method);
+            var priority = method.GetCustomAttribute<EventListenerAttribute>()!.Priority;
+            targetEventBus.SubscribeMethod(method, priority);
         }
     }
 }

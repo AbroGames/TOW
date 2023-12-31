@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TOW.Scripts.KludgeBox.Events;
 
 public sealed class ListenerToken
 {
-    internal IListener? Listener { get; private set; }
+    internal IListener Listener { get; private set; }
 
     internal WeakReference<EventHub> Hub { get; private set; }
     

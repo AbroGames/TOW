@@ -6,11 +6,32 @@ namespace TOW.Scripts.Events;
 
 public class TankEventListeners
 {
-    [EventListener]
-    public static void OnTowerRotated(TankTowerRotatedEvent @event)
+    [EventListener(ListenerPriority.Lowest)]
+    public static void OnTowerRotatedLowest(TankTowerRotatedEvent @event)
     {
-        Log.Info($"{@event.Tank.Name}'s tower has been rotated");
-        @event.Cancel();
+        Log.Info($"{@event.Tank.Name}'s tower has been rotated (lowest)");
+        //@event.Cancel();
+    }
+    
+    [EventListener(ListenerPriority.Monitor)]
+    public static void OnTowerRotatedMonitor(TankTowerRotatedEvent @event)
+    {
+        Log.Info($"{@event.Tank.Name}'s tower has been rotated (monitor)");
+        //@event.Cancel();
+    }
+    
+    [EventListener(ListenerPriority.Highest)]
+    public static void OnTowerRotatedHighest(TankTowerRotatedEvent @event)
+    {
+        Log.Info($"{@event.Tank.Name}'s tower has been rotated (highest)");
+        //@event.Cancel();
+    }
+    
+    [EventListener]
+    public static void OnTowerRotatedNormal(TankTowerRotatedEvent @event)
+    {
+        Log.Info($"{@event.Tank.Name}'s tower has been rotated (normal)");
+        //@event.Cancel();
     }
     
     [EventListener]

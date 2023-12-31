@@ -5,34 +5,56 @@ namespace TOW.Scripts.KludgeBox.Events;
 
 internal sealed class EventHub
 {
-    private List<IListener> _listeners = new List<IListener>();
+    //private List<IListener> _listeners = new();
 
+    private List<IListener>[] _listenersByPriority;
+
+    public EventHub()
+    {
+        var prioritiesCount = Enum.GetValues(typeof(ListenerPriority)).Length;
+        _listenersByPriority = new List<IListener>[prioritiesCount];
+        for (int i = 0; i < prioritiesCount; i++)
+        {
+            _listenersByPriority[i] = new();
+        }
+    }
+    
     internal void Publish<T>(T @event) where T : IEvent
     {
         if (@event is not null)
         {
-            foreach (var listener in _listeners)
+            foreach (var priority in _listenersByPriority)
             {
-                listener?.Deliver(@event);
+                foreach (var listener in priority)
+                {
+                    listener?.Deliver(@event);
+                }
             }
+            
         }
     }
 
-    internal ListenerToken Subscribe<T>(Action<T> action) where T : IEvent
+    internal ListenerToken Subscribe<T>(Action<T> action, ListenerPriority priority) where T : IEvent
     {
+        var priorityListeners = _listenersByPriority[(int)priority];
+        
         var subscription = new Listener<T>(action);
-        _listeners.Add(subscription);
+        priorityListeners.Add(subscription);
         var token = new ListenerToken(subscription, this);
         return token;
     }
 
     internal void Unsubscribe(ListenerToken token)
     {
-        _listeners.Remove(token.Listener);
+        foreach (var listeners in _listenersByPriority)
+        {
+            listeners.Remove(token.Listener);
+        }
     }
 
     public void Reset()
     {
-        _listeners = new List<IListener>();
+        var prioritiesCount = Enum.GetValues(typeof(ListenerPriority)).Length;
+        _listenersByPriority = new List<IListener>[prioritiesCount];
     }
 }
