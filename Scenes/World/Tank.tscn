@@ -28,11 +28,13 @@ script = ExtResource("3_laaoh")
 [node name="Barrel" type="Node2D" parent="Tower"]
 
 [node name="Sprite2D" type="Sprite2D" parent="Tower/Barrel"]
+material = SubResource("ShaderMaterial_m2mb1")
 position = Vector2(0, -50)
 scale = Vector2(0.2, 1)
 texture = ExtResource("2_otf7b")
 
 [node name="Sprite2D" type="Sprite2D" parent="Tower"]
+material = SubResource("ShaderMaterial_m2mb1")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_otf7b")
 
