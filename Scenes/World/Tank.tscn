@@ -1,8 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://qvosehqkuvnb"]
+[gd_scene load_steps=7 format=3 uid="uid://qvosehqkuvnb"]
 
 [ext_resource type="Script" path="res://Scripts/World/Tank.cs" id="1_nehhi"]
+[ext_resource type="Shader" path="res://Assets/Shaders/HitShader.gdshader" id="1_ptiri"]
 [ext_resource type="Texture2D" uid="uid://duw1nehdl2flg" path="res://Assets/Textures/icon.svg" id="2_otf7b"]
 [ext_resource type="Script" path="res://Scripts/World/Tower.cs" id="3_laaoh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m2mb1"]
+resource_local_to_scene = true
+shader = ExtResource("1_ptiri")
+shader_parameter/flashColor = Vector4(1, 0, 0, 1)
+shader_parameter/mixAmount = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lk5bf"]
 size = Vector2(102, 128)
@@ -11,6 +18,7 @@ size = Vector2(102, 128)
 script = ExtResource("1_nehhi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_m2mb1")
 scale = Vector2(0.8, 1)
 texture = ExtResource("2_otf7b")
 

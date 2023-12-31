@@ -1,4 +1,6 @@
 using Godot;
+using KludgeBox.Godot;
+using TOW.Scripts.Content;
 using TOW.Scripts.Events;
 using TOW.Scripts.KludgeBox.Godot.Extensions;
 using TOW.Scripts.Services;
@@ -12,9 +14,17 @@ public partial class Tank : Node2D
 	[Export] private double _movementSpeed = 250; // in pixels/sec
 	[Export] private double _rotationSpeed = 120; // in angles/sec
 	[Export] private double _towerRotationSpeed = 240; // in angles/sec
+	[Export] private bool _isPlayer = true;
 	private Tower Tower => GetNode("Tower") as Tower;
+	private Sprite2D Sprite => GetNode("Sprite2D") as Sprite2D;
 	private EventBus _eventBus => ServiceProvider.Get<EventBus>();
 
+	private double HitOpacity
+	{
+		get => (Sprite.Material as ShaderMaterial)?.GetShaderParameter("mixAmount").AsDouble() ?? -1;
+		set => (Sprite.Material as ShaderMaterial)?.SetShaderParameter("mixAmount", value);
+	}
+	
 	public override void _Ready()
 	{
 		
@@ -22,9 +32,14 @@ public partial class Tank : Node2D
 
 	public override void _Process(double delta)
 	{
+		HitOpacity = Mathf.Max(HitOpacity - 0.05, 0);
+		
+		if(!_isPlayer) return;
+		
 		var movementInput = GetInput();
 		var requiredTowerRotation = GetAimAngle();
 
+		
 		// Movement
 		if (movementInput.Y != 0)
 		{
@@ -59,6 +74,12 @@ public partial class Tank : Node2D
 		}
 	}
 
+	public void Hit()
+	{
+		HitOpacity = 1;
+		Audio2D.PlaySoundOn((string)Sfx.Hit, this, 1);
+	}
+	
 	private Vector2 GetInput()
 	{
 		return Input.GetVector(
