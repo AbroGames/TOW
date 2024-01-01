@@ -29,8 +29,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Utils\**" />
+    <Compile Remove="ExampleMod\**" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Utils\**" />
+    <EmbeddedResource Remove="ExampleMod\**" />
   </ItemGroup>
 </Project>
