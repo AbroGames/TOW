@@ -98,6 +98,7 @@ public partial class Tank : Node2D
 			if (_dashCd.FractionElapsed is < 1 and > 0)
 			{
 				_dashDuration.Restart();
+				Audio2D.PlaySoundOn((string)Sfx.Woosh, this, 1);
 				_dashing = true;
 			}
 			else
