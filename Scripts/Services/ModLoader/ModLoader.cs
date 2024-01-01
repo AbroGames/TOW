@@ -73,7 +73,7 @@ public partial class ModLoader : Services.Service
         return mod;
     }
 
-    internal override void Run()
+    public override void Run()
     {
         _modsDir = _userModsFs.GetDirectory("/Mods");
         var dlls = _modsDir.Files.Where(file => file.Path.EndsWith(".dll"));

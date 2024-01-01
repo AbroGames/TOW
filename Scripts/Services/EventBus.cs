@@ -79,7 +79,7 @@ public partial class EventBus : Service
         _bus.ResetEvent<T>();
     }
 
-    internal override void Run()
+    public override void Run()
     {
         ScanEventListeners();
     }
