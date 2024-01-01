@@ -9,34 +9,34 @@ public class TankEventListeners
     [EventListener(ListenerPriority.Lowest)]
     public static void OnTowerRotatedLowest(TankTowerRotatedEvent @event)
     {
-        Log.Info($"{@event.Tank.Name}'s tower has been rotated (lowest)");
+       // Log.Info($"{@event.Tank.Name}'s tower has been rotated (lowest)");
         //@event.Cancel();
     }
     
     [EventListener(ListenerPriority.Monitor)]
     public static void OnTowerRotatedMonitor(TankTowerRotatedEvent @event)
     {
-        Log.Info($"{@event.Tank.Name}'s tower has been rotated (monitor)");
+        //Log.Info($"{@event.Tank.Name}'s tower has been rotated (monitor)");
         //@event.Cancel();
     }
     
     [EventListener(ListenerPriority.Highest)]
     public static void OnTowerRotatedHighest(TankTowerRotatedEvent @event)
     {
-        Log.Info($"{@event.Tank.Name}'s tower has been rotated (highest)");
+        //Log.Info($"{@event.Tank.Name}'s tower has been rotated (highest)");
         //@event.Cancel();
     }
     
     [EventListener]
     public static void OnTowerRotatedNormal(TankTowerRotatedEvent @event)
     {
-        Log.Info($"{@event.Tank.Name}'s tower has been rotated (normal)");
+        //Log.Info($"{@event.Tank.Name}'s tower has been rotated (normal)");
         //@event.Cancel();
     }
     
     [EventListener]
     public static void OnTankMoved(TankMovedEvent @event)
     {
-        Log.Info($"{@event.Tank.Name} has been moved");
+        //Log.Info($"{@event.Tank.Name} has been moved");
     }
 }
