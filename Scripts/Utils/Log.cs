@@ -32,11 +32,14 @@ public static class Log
         foreach (var rawPrefix in rawPrefixes)
         {
             var sb = new StringBuilder();
+            sb.Append('|');
+            sb.Append(' ');
             sb.Append(rawPrefix.ToUpper());
-            while (sb.Length < longestPrefix)
+            for (int i = 0; i < longestPrefix - rawPrefix.Length + 1; i++)
             {
                 sb.Append(' ');
             }
+            sb.Append('|');
             prefixes.Add(sb.ToString());
         }
 
@@ -87,7 +90,7 @@ public static class Log
         string text = msg.ToString();
         
         var now = DateTime.Now;
-        return $"{now.ToShortDateString()} {now.ToLongTimeString()} {_prefixes[(int)prefix]} {text}";
+        return $"{now:dd.MM.yyyy HH:mm:ss.fff} {_prefixes[(int)prefix]} {text}";
     }
 }
 
