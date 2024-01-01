@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://Assets/Shaders/GrayScaleFilter.gdshader" id="2_d04hx"]
 [ext_resource type="Texture2D" uid="uid://duw1nehdl2flg" path="res://Assets/Textures/icon.svg" id="3_jx7ku"]
 [ext_resource type="PackedScene" uid="uid://qvosehqkuvnb" path="res://Scenes/World/Tank.tscn" id="4_g2srd"]
-[ext_resource type="Script" path="res://Scenes/World/TowerCollider.cs" id="5_0a6yu"]
+[ext_resource type="Script" path="res://Scripts/World/TowerCollider.cs" id="5_0a6yu"]
 [ext_resource type="Shader" path="res://Assets/Shaders/HitShader.gdshader" id="5_iccos"]
 [ext_resource type="PackedScene" uid="uid://070bv3khjbgv" path="res://Scenes/Screen/HUD/HpIndicator.tscn" id="5_p7uox"]
 
