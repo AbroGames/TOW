@@ -165,4 +165,27 @@ public static class CollectionExtensions
 		}
 		return result;
 	}
+	
+	/// <summary>
+	/// Generates a batch of strings based on a template with numbers ranging from min to max (inclusive).<br/>
+	/// Numbers will be placed just before the file extension.
+	/// </summary>
+	/// <param name="path">The template path to which numbers will be appended.</param>
+	/// <param name="min">The minimum number to include in the batch.</param>
+	/// <param name="max">The maximum number to include in the batch.</param>
+	/// <returns>A list of strings representing the generated batch with appended numbers.</returns>
+	public static List<string> BatchNumberAuto(this string path, int min, int max)
+	{
+		List<string> result = new List<string>();
+
+		var extension = Path.GetExtension(path);
+		var pathWithoutExtension = path.Substring(0, path.Length - extension.Length);
+		
+		for (int i = min; i <= max; i++)
+		{
+			string item = $"{pathWithoutExtension}{i}{extension}";
+			result.Add(item);
+		}
+		return result;
+	}
 }
