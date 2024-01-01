@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
 using Godot;
 using TOW.Scripts.KludgeBox.VFS.Base;
 using TOW.Scripts.KludgeBox.VFS.FileSystems;
@@ -27,11 +28,13 @@ public partial class ModLoader : Services.Service
     private List<Assembly> Load(IEnumerable<FsFile> dlls)
     {
         var loadedAssemblies = new List<Assembly>();
+        var alc = GetCurrentAlc();
         foreach (var dll in dlls)
         {
             try
             {
-                var assembly = Assembly.Load(dll.ReadAllBytes());
+                var assembly = alc.LoadFromStream(dll.OpenRead());
+                //var assembly = Assembly.Load(dll.ReadAllBytes());
                 loadedAssemblies.Add(assembly);
             }
             catch (Exception e)
@@ -43,8 +46,32 @@ public partial class ModLoader : Services.Service
         return loadedAssemblies;
     }
 
+    private AssemblyLoadContext GetCurrentAlc()
+    {
+        // Get the currently executing assembly
+        Assembly asm = Assembly.GetExecutingAssembly();
+
+        // Get the AssemblyLoadContext for the currently executing assembly
+        AssemblyLoadContext loadContext = AssemblyLoadContext.GetLoadContext(asm);
+
+        return loadContext;
+    }
+    
     private Mod Run(Assembly assembly)
     {
+        var alcs = AssemblyLoadContext.All;
+        Log.Debug($"Following {alcs.Count()} ALCs are presented:");
+        foreach (var alc in alcs)
+        {
+            Log.Debug($"'{alc.Name}' contains assemblies:");
+            foreach (var alcAssembly in alc.Assemblies)
+            {
+                Log.Debug($"\t{alcAssembly}");
+            }
+        }
+
+        Log.Info();
+        
         var mods = assembly.FindAllTypesThatDeriveFrom<Mod>();
         if (mods.Count() > 1) throw new TooMuchModsException();
 
