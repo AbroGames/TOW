@@ -113,7 +113,7 @@ public class GodotFileSystem : FileSystem, IProxyFileSystem
         if (DirAccess.GetOpenError() != Error.Ok)
             throw new IOException($"Unable to open directory '{this.GetRealPath(path)}'");
 
-        return dir.GetFiles().Select(f => new FsFile(this, f)).ToArray();
+        return dir.GetFiles().Select(f => new FsFile(this, PathHelper.Combine(path, f))).ToArray();
     }
 
     public override FsDirectory[] GetDirectories(string path)
@@ -123,7 +123,7 @@ public class GodotFileSystem : FileSystem, IProxyFileSystem
         if (DirAccess.GetOpenError() != Error.Ok)
             throw new IOException($"Unable to open directory '{this.GetRealPath(path)}'");
 
-        return dir.GetDirectories().Select(f => new FsDirectory(this, f)).ToArray();
+        return dir.GetDirectories().Select(f => new FsDirectory(this, PathHelper.Combine(path, f))).ToArray();
     }
 
     public override bool IsDirectory(string path)
