@@ -15,5 +15,6 @@ public partial class BackgroundContainer : Control, INodeContainer<Control>
 	public void ClearStoredNode()
 	{
 		(this as INodeContainer<Control>).ClearStoredNode();
+		CurrentStoredNode = null;
 	}
 }

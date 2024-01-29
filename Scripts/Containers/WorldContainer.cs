@@ -23,5 +23,6 @@ public partial class WorldContainer : Node2D, INodeContainer<Node2D>
 		if (ServiceProvider.Get<EventBus>().PublishAndCheck(new WorldRemovedEvent(CurrentStoredNode))) return;
 		
 		CurrentStoredNode?.QueueFree();
+		CurrentStoredNode = null;
 	}
 }

@@ -18,5 +18,6 @@ public partial interface INodeContainer <TStored> where TStored : Node
 	public void ClearStoredNode()
 	{
 		CurrentStoredNode?.QueueFree();
+		CurrentStoredNode = null;
 	}
 }

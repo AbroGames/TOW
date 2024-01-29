@@ -17,5 +17,6 @@ public partial class ForegroundContainer : Control, INodeContainer<Control>
 	public void ClearStoredNode()
 	{
 		CurrentStoredNode?.QueueFree();
+		CurrentStoredNode = null;
 	}
 }
